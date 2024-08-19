@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Stream</title>
+    <title>Session de Travail</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Flemmardise detector</h1>
-            <p>La position de travaille est défini comme étant assis devant un ordinateur portable !</p>
+            <h1>Session de Travail</h1>
+            <p>Utilisez les boutons ci-dessous pour contrôler votre session de travail.</p>
         </header>
 
         <div class="video-container">
@@ -20,8 +20,30 @@
         </div>
 
         <div class="controls">
-            <button id="start-btn" class="btn btn-start">Commencer l'enregistrement</button>
-            <button id="stop-btn" class="btn btn-stop" disabled>Arrêter l'enregistrement</button>
+            <button id="start-btn" class="btn btn-start">Commencer la session</button>
+            <button id="stop-btn" class="btn btn-stop" disabled>Arrêter la session</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="session-modal" class="modal">
+        <div class="modal-content">
+            <h2>Détails de la Session de Travail</h2>
+            <form id="session-form">
+                <label for="activity">Que comptez-vous faire ?</label>
+                <input type="text" id="activity" name="activity" required>
+
+                <label for="duration">Combien de temps comptez-vous travailler ? (en minutes)</label>
+                <input type="number" id="duration" name="duration" required>
+
+                <label for="motivation">Qu'est-ce qui vous motive à faire cela ?</label>
+                <input type="text" id="motivation" name="motivation" required>
+
+                <label for="consequences">Quelles sont les conséquences si vous ne travaillez pas ?</label>
+                <input type="text" id="consequences" name="consequences" required>
+
+                <button type="submit" class="btn btn-submit">Démarrer la Session</button>
+            </form>
         </div>
     </div>
 

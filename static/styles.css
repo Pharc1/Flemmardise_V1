@@ -18,7 +18,7 @@ body {
 }
 
 .container:hover {
-    transform: translateY(-10px);
+    transform: translateY(-1px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
@@ -41,7 +41,7 @@ p {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
     background: #000;
     border-radius: 10px;
     overflow: hidden;
@@ -108,5 +108,60 @@ video {
 
 .btn-stop:hover {
     background: linear-gradient(135deg, #e53935, #EF5350);
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #3a3a3a;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.modal h2 {
+    margin-top: 0;
+    color: #f1f1f1;
+}
+
+.modal label {
+    color: #e0e0e0;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.modal input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    background-color: #5a5a5a;
+    color: #fff;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #FF6347, #FF7F50);
+    color: white;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #FF4500, #FF6347);
     transform: scale(1.05);
 }

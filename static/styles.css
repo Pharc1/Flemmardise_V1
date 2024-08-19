@@ -1,7 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
     margin: 0;
     padding: 0;
 }
@@ -9,11 +9,17 @@ body {
 .container {
     width: 80%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 3vh auto;
     padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #2b2b2b;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
 header {
@@ -23,7 +29,12 @@ header {
 
 h1 {
     margin: 0;
-    color: #333;
+    color: #f1f1f1;
+    font-weight: 500;
+}
+
+p {
+    color: #aaaaaa;
 }
 
 .video-container {
@@ -32,7 +43,7 @@ h1 {
     height: 0;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     background: #000;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -56,7 +67,13 @@ video {
 }
 
 .status-on {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
     background: rgba(0, 255, 0, 0.7);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 .controls {
@@ -71,23 +88,25 @@ video {
     border-radius: 5px;
     cursor: pointer;
     margin: 0 10px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 .btn-start {
-    background-color: #4CAF50; /* Green */
+    background: linear-gradient(135deg, #4CAF50, #81C784);
     color: white;
 }
 
 .btn-start:hover {
-    background-color: #45a049;
+    background: linear-gradient(135deg, #45a049, #66BB6A);
+    transform: scale(1.05);
 }
 
 .btn-stop {
-    background-color: #f44336; /* Red */
+    background: linear-gradient(135deg, #f44336, #e57373);
     color: white;
 }
 
 .btn-stop:hover {
-    background-color: #e53935;
+    background: linear-gradient(135deg, #e53935, #EF5350);
+    transform: scale(1.05);
 }

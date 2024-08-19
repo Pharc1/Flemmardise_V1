@@ -4,35 +4,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const stopBtn = document.getElementById('stop-btn');
     const status = document.getElementById('status');
 
-    let stream = null;
+    let isRecording = false;
 
-    // Fonction pour démarrer l'enregistrement
-    startBtn.addEventListener('click', async () => {
-        try {
-            stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            video.srcObject = stream;
-            video.play();
+    startBtn.addEventListener('click', () => {
+        if (!isRecording) {
+            video.src = videoFeedUrl;
             startBtn.disabled = true;
             stopBtn.disabled = false;
             status.textContent = 'Statut : En cours';
             status.classList.remove('status-off');
             status.classList.add('status-on');
-        } catch (error) {
-            console.error('Erreur lors de l\'accès à la caméra:', error);
+            isRecording = true;
         }
     });
 
-    // Fonction pour arrêter l'enregistrement
     stopBtn.addEventListener('click', () => {
-        if (stream) {
-            let tracks = stream.getTracks();
-            tracks.forEach(track => track.stop());
-            video.srcObject = null;
+        if (isRecording) {
+            video.src = ""; // Clear the src to stop the video
             startBtn.disabled = false;
             stopBtn.disabled = true;
             status.textContent = 'Statut : Arrêté';
             status.classList.remove('status-on');
             status.classList.add('status-off');
+            isRecording = false;
         }
     });
 });

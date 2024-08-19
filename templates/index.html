@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camera Stream</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Camera Stream</h1>
-            <p>Utilisez les boutons ci-dessous pour contrôler l'enregistrement de la caméra.</p>
+            <h1>Flemmardise detector</h1>
+            <p>La position de travaille est défini comme étant assis devant un ordinateur portable !</p>
         </header>
 
         <div class="video-container">
-            <video id="video" autoplay></video>
+            <img id="video" style="width: 100%; height: auto;">
             <div id="status" class="status-off">Statut : Arrêté</div>
         </div>
 
@@ -24,6 +25,9 @@
         </div>
     </div>
 
+    <script>
+        const videoFeedUrl = "{{ url_for('video_feed') }}";
+    </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ else:
 
     
 # Charger le modèle pré-entraîné
-model = tf.keras.layers.TFSMLayer('model/Flemardise_V1', call_endpoint='serving_default')
+model = tf.keras.models.load_model('model/Flemardise_V1.keras')
 
 # Configuration de la caméra
 camera = cv2.VideoCapture(0)  # 0 pour la caméra par défaut
@@ -31,7 +31,10 @@ def predict_frame(frame):
     prediction = model.predict(image)
     return prediction[0][0]  # Pour une classification binaire
 
+last_prediction = None  # Déclarez une variable globale pour stocker la dernière prédiction
+
 def generate_frames():
+    global last_prediction
     while True:
         success, frame = camera.read()
         if not success:
@@ -39,12 +42,17 @@ def generate_frames():
 
         # Effectuer la prédiction
         prediction = predict_frame(frame)
+        last_prediction = prediction  # Mettre à jour la dernière prédiction
+        prediction_text = f"Prediction: {prediction:.2f}"
 
         # Déterminer la couleur du cadre en fonction de la prédiction
         color = (0, 255, 0) if prediction > 0.5 else (0, 0, 255)
 
         # Dessiner le cadre autour de l'image
-        cv2.rectangle(frame, (0, 0), (frame.shape[1], frame.shape[0]), color, 10)
+        cv2.rectangle(frame, (0, 0), (frame.shape[1], frame.shape[0]), color, 2)
+
+        # Ajouter la prédiction en texte sur l'image avec une taille plus petite
+        cv2.putText(frame, prediction_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1, cv2.LINE_AA)
 
         # Encoder l'image au format JPEG
         ret, buffer = cv2.imencode('.jpg', frame)

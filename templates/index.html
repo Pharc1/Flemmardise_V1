@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Stream</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Camera Stream</h1>
+            <p>Utilisez les boutons ci-dessous pour contrôler l'enregistrement de la caméra.</p>
+        </header>
+
+        <div class="video-container">
+            <video id="video" autoplay></video>
+            <div id="status" class="status-off">Statut : Arrêté</div>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn" class="btn btn-start">Commencer l'enregistrement</button>
+            <button id="stop-btn" class="btn btn-stop" disabled>Arrêter l'enregistrement</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

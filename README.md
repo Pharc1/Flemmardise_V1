@@ -1,3 +1,5 @@
+# Description du projet 
+
 En travaillant avec un ami, j'ai remarqué que ma productivité augmentait lorsque je me sentais "surveillé" par quelqu'un. 
 
 <img src="images/working.jpg" style="width:460px;height:220px;">

@@ -13,4 +13,4 @@ Le but est de développer un classifieur binaire capable de différencier les é
 
 
 
-lien du model entrainé: https://1drv.ms/f/s!AsKHc19k0hyWg5RYWv1spnBUKBlBFA?e=4Vveba
+lien du model entrainé: https://1drv.ms/u/s!AsKHc19k0hyWg5Rf5wO7H_nuPdKtWA?e=BAmMbh

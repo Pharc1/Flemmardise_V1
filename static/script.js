@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         audio.play();
     }
 
-    // Optionnel : Répéter pour vérifier si un nouveau fichier audio a été généré
+    // Répéter pour vérifier si un nouveau fichier audio a été généré
     setInterval(() => {
         fetch('/check_motivation')
             .then(response => response.json())
@@ -81,5 +81,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
             .catch((error) => {
                 console.error('Error:', error);
             });
-    }, 5000); // Vérifier toutes les 5 secondes
+    }, 500000); // Vérifier toutes les 50 secondes
 });

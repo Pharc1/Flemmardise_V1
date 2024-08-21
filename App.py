@@ -24,7 +24,7 @@ else:
 model = tf.keras.models.load_model('model/Flemardise_V1.keras')
 
 # Configuration de la caméra
-camera = cv2.VideoCapture(0)  # 0 pour la caméra par défaut
+camera = cv2.VideoCapture(0)  # 0 pour la caméra par défaut, sinon emplacement d'une vidéo
 
 # Variable globale pour stocker les détails de la session
 session_details = {}
@@ -33,16 +33,16 @@ new_audio_generated = False
 
 def preprocess_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = cv2.resize(image, (160, 160))  # Assurez-vous que la taille correspond à celle du modèle
-    image = image / 255.0  # Normaliser l'image
-    return np.expand_dims(image, axis=0)  # Ajouter une dimension pour le batch
+    image = cv2.resize(image, (160, 160)) 
+    image = np.array(image)
+    return np.expand_dims(image, axis=0)  # Preprocess utilisé lors de l'entrainement du model EfficienNet 
 
 def predict_frame(frame):
     image = preprocess_image(frame)
     prediction = model.predict(image)
-    return prediction[0][0]  # Pour une classification binaire
+    return prediction[0][0] 
 
-last_prediction = None  # Déclarez une variable globale pour stocker la dernière prédiction
+last_prediction = None 
 
 def generate_frames():
     global last_prediction, new_audio_generated
@@ -53,24 +53,24 @@ def generate_frames():
 
         # Effectuer la prédiction
         prediction = predict_frame(frame)
-        last_prediction = prediction  # Mettre à jour la dernière prédiction
+        last_prediction = prediction  
         prediction_text = f"Prediction: {prediction:.2f}"
 
-        # Si la prédiction indique que l'utilisateur ne travaille pas
-        if prediction > 0.5:
+        # Si la prédiction indique que l'utilisateur ne travaille pas un message de motivation est envoyé
+        if prediction < 0.2:
             send_motivation()
             
 
         # Déterminer la couleur du cadre en fonction de la prédiction
-        color = (0, 255, 0) if prediction <= 0.5 else (0, 0, 255)
-
+        color = (0, 255, 0) if prediction >= 0.5 else (0, 0, 255)
+        print(prediction)
         # Dessiner le cadre autour de l'image
-        cv2.rectangle(frame, (0, 0), (frame.shape[1], frame.shape[0]), color, 2)
+        cv2.rectangle(frame, (3, 3), (frame.shape[1], frame.shape[0]), color, 5)
 
-        # Ajouter la prédiction en texte sur l'image avec une taille plus petite
-        cv2.putText(frame, prediction_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1, cv2.LINE_AA)
+        # Ajouter la prédiction en texte sur l'image
+        cv2.putText(frame, prediction_text, (10, 80), cv2.FONT_HERSHEY_SIMPLEX, 3, color, 1, cv2.LINE_AA)
 
-        # Encoder l'image au format JPEG
+        # Encoder l'image
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
 
@@ -119,7 +119,7 @@ def send_motivation():
     new_audio_generated = True
 
 def generate_audio_message(message):
-    # Utilisation du TTS d'OpenAI pour générer un message audio
+    # Utilisation du TTS d'OpenAI pour générer un message audio du message de motivation
     speech_file_path = Path(__file__).parent / "static" / "speech.mp3"
     response = client.audio.speech.create(
     model="tts-1",
@@ -127,6 +127,8 @@ def generate_audio_message(message):
     input=message
     )
     response.stream_to_file(speech_file_path)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
